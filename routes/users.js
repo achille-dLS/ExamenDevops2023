@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User.js');
+const Utils = require('../utils/utils.js')
 const bcrypt = require('bcrypt');
+const { Utils } = require('hbs');
 const saltRounds = 10;
 
 /* form login / password */
@@ -69,6 +71,7 @@ router.post('/add', (req, res, next) => {
     console.log("USERS ADD");
     // validation 
     let errors = [];
+    if(!Utils.checkPassword(req.body.userPassword)) errors.push("le mots de passe ne respecte pas les règles : min 8 char, min 1 char spécial, min un chiffre ou lettre");
     if (req.body.userPassword != req.body.userPasswordConfirmation) errors.push("Les mot de passes ne correspondent pas");
     if (User.find(req.body.userEmail)) errors.push("Email/Utilisateur déjà présent en DB");
     if (errors.length == 0) {
