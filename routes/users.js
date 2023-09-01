@@ -4,7 +4,6 @@ const router = express.Router();
 const User = require('../models/User.js');
 const Utils = require('../utils/utils.js')
 const bcrypt = require('bcrypt');
-const { Utils } = require('hbs');
 const saltRounds = 10;
 
 /* form login / password */
